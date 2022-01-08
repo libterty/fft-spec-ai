@@ -6,19 +6,53 @@ module.exports = {
   },
   plugins: ['@typescript-eslint/eslint-plugin'],
   extends: [
+    'plugin:@typescript-eslint/eslint-recommended',
     'plugin:@typescript-eslint/recommended',
-    'plugin:prettier/recommended',
+    'prettier',
+    'prettier/@typescript-eslint',
   ],
   root: true,
   env: {
     node: true,
     jest: true,
   },
-  ignorePatterns: ['.eslintrc.js'],
-  rules: {
-    '@typescript-eslint/interface-name-prefix': 'off',
-    '@typescript-eslint/explicit-function-return-type': 'off',
-    '@typescript-eslint/explicit-module-boundary-types': 'off',
-    '@typescript-eslint/no-explicit-any': 'off',
-  },
+  overrides: [
+    {
+      "files": ["**/*.ts", "**/*.d.ts"],
+      "parserOptions": {
+        "parser": "@typescript-eslint/parser",
+        "ecmaVersion": 2020,
+        "ecmaFeatures": {
+          "legacyDecorators": true
+        }
+      },
+
+      "parser": "@typescript-eslint/parser",
+      "plugins": [
+        "@typescript-eslint"
+      ],
+      "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/eslint-recommended",
+        "plugin:@typescript-eslint/recommended"
+      ],
+      "rules": {
+        "no-console": process.env.NODE_ENV === "production" ? "warn" : "off",
+        "no-debugger": process.env.NODE_ENV === "production" ? "warn" : "off",
+        "quotes": "off",
+        "semi": [2, "never"],
+        "space-before-function-paren": "off",
+        "indent": "off",
+        "@typescript-eslint/indent": ["error", 2],
+        "comma-dangle": "off",
+        "no-useless-constructor": "off",
+        "@typescript-eslint/no-useless-constructor": "error",
+        "import/extensions": 0,
+        "lines-between-class-members": ["error", "always", {
+          "exceptAfterSingleLine": true
+        }],
+      },
+    }
+  ],
 };
+

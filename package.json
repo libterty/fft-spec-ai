@@ -56,7 +56,7 @@
     "typescript": "^3.7.4"
   },
   "_moduleAliases": {
-    "@ttfs": "ttfs"
+    "@ffts": "ffts"
   },
   "husky": {
     "hooks": {

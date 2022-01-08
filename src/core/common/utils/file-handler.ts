@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any, @typescript-eslint/no-unused-vars, @typescript-eslint/explicit-module-boundary-types */
 
-import fs from 'fs'
-import path, { join } from 'path'
+import * as fs from 'fs'
+import * as path from 'path'
 
 export class FileHandler {
   /**
@@ -75,8 +75,7 @@ export class FileHandler {
    * @private
    * @returns {Promise<boolean}
    */
-  public isDirectoryExist(): Promise<boolean> {
-    const path: string = join(process.cwd(), 'orm-logs')
+  public isDirectoryExist(path: string): Promise<boolean> {
     return new Promise((resolve, reject) => {
       fs.statSync(path)
     })
@@ -92,6 +91,10 @@ export class FileHandler {
     this.createFolder(this.getPath(fileName))
     const realPath = this.realPath(fileName)
     return fs.readFileSync(realPath)
+  }
+
+  public createReadStream(fileName: string): fs.ReadStream {
+    return fs.createReadStream(fileName)
   }
 
   /**

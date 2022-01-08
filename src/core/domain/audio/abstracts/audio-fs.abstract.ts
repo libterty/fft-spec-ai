@@ -1,5 +1,3 @@
-
-
 import { extname } from 'path'
 import { Transform } from 'stream'
 import { Logger } from '@nestjs/common'
@@ -9,14 +7,10 @@ import { IAudioFsAbstractAdapter } from '@ffts/core/domain/audio/interfaces/audi
 import { EAudioExt } from '@ffts/core/domain/audio/value-object/audio.domain'
 import * as ICommonTypes from '@ffts/core/common/types/CommonTypes'
 
-
 export abstract class AudioFsAbstractAdapter implements IAudioFsAbstractAdapter {
   abstract onAudioReadStream<T extends ICommonTypes.auto, R extends ICommonTypes.auto>(result: T): R
 
-  constructor(
-    private readonly logger: Logger,
-    private readonly fileHandler: FileHandler
-  ) {}
+  constructor(private readonly logger: Logger, private readonly fileHandler: FileHandler) {}
 
   public getExtensionName(file: string): string {
     return extname(file)
@@ -45,12 +39,11 @@ export abstract class AudioFsAbstractAdapter implements IAudioFsAbstractAdapter 
         // this.logger.log(result, '')
         this.onAudioReadStream(result)
         done(null, result)
-      }
+      },
     })
     // const fileStatus = this.fileHandler.getFileStatus(file)
     const stream = this.fileHandler.createReadStream(file)
-    stream
-      .pipe(pipeStream)
+    stream.pipe(pipeStream)
   }
 }
 

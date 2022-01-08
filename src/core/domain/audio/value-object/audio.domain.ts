@@ -2,7 +2,7 @@
 
 export enum EAudioExt {
   WAV = '.wav',
-  MP3 = '.mp3'
+  MP3 = '.mp3',
 }
 
 export interface IAudioDomain {}

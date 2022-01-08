@@ -121,8 +121,7 @@ export class FileHandler {
       const realPath = this.realPath(fileName)
       fs.accessSync(fileName)
       return true
-    }
-    catch (error) {
+    } catch (error) {
       return false
     }
   }
